@@ -1,5 +1,7 @@
 # Western Sydney Hub
 
+> **No longer maintained.** This is the documentation for a retired edition of BW BricsCAD Tools. It will receive no further updates.
+
 The central hub for the Beveridge Williams Western Sydney office: the BricsCAD
 plugin suite, our drafting and survey standards, and onboarding material.
 Published with GitHub Pages.

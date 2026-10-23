@@ -340,6 +340,12 @@
                        text: 'Early Access', title: 'The suite is in daily use and actively evolving — click for what that means' });
 
     host.appendChild(el('div', { class: 'header-inner' }, [burger, logo, ea, nav, theme]));
+
+    // Retired edition: one note at the top of every page's content.
+    var main = document.getElementById('main');
+    if (main) main.insertBefore(el('div', { class: 'legacy-note', role: 'note',
+      html: '<strong>No longer maintained.</strong> This is the documentation for a retired ' +
+            'edition of BW BricsCAD Tools. It will receive no further updates.' }), main.firstChild);
   }
 
   /* ---------- Sidebar --------------------------------------------------- */
