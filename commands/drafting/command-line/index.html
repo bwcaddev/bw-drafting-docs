@@ -368,6 +368,18 @@ No:3</code></pre>
         Then select objects and drag to choose the side.</p>
     <div class="note"><strong>Note</strong> — A whole batch offsets consistently — closed shapes all grow or all shrink together. You can type an exact distance mid-drag.</div>
 
+<h2 id="polygrid"><code class="cmd">POLYGRID</code></h2>
+    <p>Places grid points inside any closed outline with levels taken from the drawing's TIN — the levels for a simplified surface inside, say, a top-of-kerb line or a lot.</p>
+    <h4>How to use it</h4>
+    <p>Pre-select the outline, or <code>Select closed polygon:</code> — a 2D or 3D polyline (a 3D one is projected flat),
+        circle, ellipse or spline. Then <code>Grid spacing or [Angle/Origin/Type] &lt;5&gt;:</code>.
+        <strong>Angle</strong> rotates the grid; <strong>Origin</strong> chooses <strong>World</strong>
+        (nodes on whole multiples of the spacing — a 5 m grid lands on round MGA coordinates),
+        <strong>Corner</strong> (start at the polygon's corner) or <strong>Pick</strong> a point;
+        <strong>Type</strong> switches between Civil points and plain points. With several TIN surfaces in the drawing you are asked which one.</p>
+    <p>Then build the surface: <code>TINSURFACE</code> from the new points, adding the outline as the boundary so no triangle crosses it.</p>
+    <div class="note"><strong>Note</strong> — Levels come from the TIN surface, or from 3D faces when there is no TIN; nodes off the surface are skipped and counted. Civil points are numbered from the next free number with the description <code>GRID</code>; plain points switch PDMODE on if it was 0 so they show. Nothing lands on the outline itself. Spacing, angle, origin and type are remembered for the session. No ribbon button.</div>
+
 <h2 id="vcopy"><code class="cmd">VCOPY</code></h2>
     <p>Copies blocks or text to every vertex of the chosen polylines.</p>
     <h4>How to use it</h4>
