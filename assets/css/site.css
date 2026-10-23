@@ -210,17 +210,6 @@ kbd {
   padding: 0 28px; display: flex; align-items: center; gap: 16px;
 }
 
-/* The header's Early Access chip — persistent, light-touch framing. Links to
-   the install page's "what early access means" note. */
-a.ea-badge {
-  flex: none; padding: 3px 9px; border-radius: 999px;
-  font-size: .68rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
-  color: var(--brand); text-decoration: none;
-  border: 1px solid color-mix(in srgb, var(--brand) 45%, transparent);
-  background: var(--brand-wash);
-}
-a.ea-badge:hover { border-color: var(--brand); }
-
 .logo {
   display: flex; align-items: center; gap: 9px; text-decoration: none; flex-shrink: 0;
   color: var(--ink);          /* the inlined mark's currentColor fills read this */
@@ -1684,78 +1673,6 @@ figcaption { font-size: .82rem; color: var(--ink-faint); margin-top: .7em; }
    a caveat and not the greeting. */
 .ai-fineprint { font-size: .8rem; color: var(--ink-faint); }
 
-/* Caddie's introduction on the home page.
-
-   Uses the BAND geometry (1040px, --band-pad) rather than its own numbers —
-   it sits directly above the numbered bands, and a different measure or gutter
-   made the whole page look misaligned by a few pixels for no reason.
-
-   Louder than the end-of-page offer on purpose: it announces something that did
-   not exist last week and only gets one chance to be noticed. The brand wash
-   and the rule above it do that without a photo, so it reads as part of the
-   page rather than an advert dropped into it. */
-.meet {
-  position: relative;
-  padding: 56px 0 52px;
-  --band-pad: 28px;
-  border-bottom: 1px solid var(--line);
-  background:
-    radial-gradient(120% 140% at 12% 0%, var(--brand-wash), transparent 62%),
-    var(--bg-raised);
-}
-/* A brand hairline along the top, which is what makes it read as a banner
-   rather than just another section with a tint. */
-.meet::before {
-  content: ""; position: absolute; inset: 0 0 auto 0; height: 2px;
-  background: linear-gradient(90deg, var(--brand-fill), transparent 72%);
-}
-/* Copy on the left, portrait in the banner's otherwise-empty right half. */
-.meet-inner {
-  max-width: 1040px; margin: 0 auto; padding: 0 var(--band-pad);
-  display: flex; align-items: center; justify-content: space-between; gap: 48px;
-}
-.meet-copy { flex: 1 1 auto; min-width: 0; }
-
-/* His face on the announcement — the same artwork as the chat avatar, the
-   ribbon button and the BricsCAD panel, because an introduction should show
-   the person being introduced. The glow does the "he's new here" work the
-   photo bands do with imagery. */
-.meet-face {
-  flex: none; display: block; width: 128px; height: 128px; border-radius: 50%;
-  box-shadow: 0 22px 60px -20px rgba(216, 31, 33, .65);
-}
-/* Below ~900px the empty right half stops existing, and a portrait squeezed
-   against wrapping text is the shoehorn this layout replaces — so he steps
-   aside and the chat avatar carries the face on small screens. */
-@media (max-width: 900px) { .meet-face { width: 96px; height: 96px; } }
-@media (max-width: 680px) { .meet-face { display: none; } }
-
-.meet-tag {
-  display: inline-flex; align-items: center; gap: 7px;
-  margin: 0 0 14px; padding: 4px 12px 4px 9px;
-  border-radius: 999px; background: var(--brand-fill); color: #fff;
-  font-size: .68rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
-}
-/* The dot is doing the "this is new" work, so the word can stay small. */
-.meet-tag::before {
-  content: ""; width: 6px; height: 6px; border-radius: 50%;
-  background: currentColor; opacity: .9;
-}
-
-.meet-h {
-  margin: 0 0 12px;
-  font-size: clamp(1.7rem, 4.2vw, 2.5rem);
-  line-height: 1.12; letter-spacing: -.015em;
-}
-.meet-d { margin: 0 0 12px; max-width: 62ch; color: var(--ink-muted); line-height: 1.65; }
-.meet-fine { font-size: .88rem; color: var(--ink-faint); }
-.meet-go { margin: 22px 0 0; }
-.meet-go .btn { border: 0; cursor: pointer; font: inherit; }
-
-@media (max-width: 720px) {
-  .meet { padding: 40px 0 38px; --band-pad: 20px; }
-}
-
 /* The end-of-page offer. Deliberately quiet: it is the last thing on a page
    somebody has just read, so it should read as a hand up rather than an advert
    competing with the content above it. */
@@ -1877,16 +1794,25 @@ figcaption { font-size: .82rem; color: var(--ink-faint); margin-top: .7em; }
   border-top: 1px solid var(--line);
 }
 
-/* Retired edition notice (see buildHeader in site.js). */
-.legacy-note {
-  margin: 0 0 28px;
-  padding: 12px 16px;
-  border: 1px solid var(--line-strong);
-  border-left: 3px solid var(--brand);
-  border-radius: var(--radius);
+/* Retired edition notice: a slim strip under the header (see buildHeader in
+   site.js). Same max-width and gutters as .header-inner, so its text lines up
+   with the logo on every page, home included. */
+.legacy-strip {
   background: var(--bg-subtle);
-  color: var(--ink);
-  font-size: .95em;
-  line-height: 1.5;
+  border-bottom: 1px solid var(--line);
 }
-.legacy-note strong { color: var(--ink-strong); }
+/* Plain flowing text, not flex: on a phone it wraps as one sentence instead
+   of splitting the bold lead into its own column. */
+.legacy-strip-inner {
+  max-width: 1400px; margin: 0 auto; padding: 9px 28px;
+  font-size: .84rem; line-height: 1.5; color: var(--ink-muted);
+}
+.legacy-strip-inner::before {
+  content: ""; display: inline-block; vertical-align: .12em;
+  width: 6px; height: 6px; margin-right: 10px;
+  border-radius: 50%; background: var(--brand);
+}
+.legacy-strip strong { color: var(--ink-strong); font-weight: 600; }
+@media (max-width: 640px) {
+  .legacy-strip-inner { padding: 8px 18px; font-size: .8rem; }
+}

@@ -334,18 +334,15 @@
     });
 
     host.className = 'header';
-    // Early-access framing: the suite is in daily use but actively evolving —
-    // the badge keeps that honest on every page, not just the install page.
-    var ea = el('a', { class: 'ea-badge', href: url('/getting-started/#early-access'),
-                       text: 'Early Access', title: 'The suite is in daily use and actively evolving — click for what that means' });
+    host.appendChild(el('div', { class: 'header-inner' }, [burger, logo, nav, theme]));
 
-    host.appendChild(el('div', { class: 'header-inner' }, [burger, logo, ea, nav, theme]));
-
-    // Retired edition: one note at the top of every page's content.
-    var main = document.getElementById('main');
-    if (main) main.insertBefore(el('div', { class: 'legacy-note', role: 'note',
-      html: '<strong>No longer maintained.</strong> This is the documentation for a retired ' +
-            'edition of BW BricsCAD Tools. It will receive no further updates.' }), main.firstChild);
+    // Retired edition: a slim strip under the header on every page, aligned
+    // with the header's own width and gutters so it sits the same everywhere.
+    host.parentNode.insertBefore(el('div', { class: 'legacy-strip', role: 'note' }, [
+      el('div', { class: 'legacy-strip-inner',
+        html: '<strong>No longer maintained.</strong> This documentation covers a retired ' +
+              'edition of BW BricsCAD Tools and will receive no further updates.' })
+    ]), host.nextSibling);
   }
 
   /* ---------- Sidebar --------------------------------------------------- */
